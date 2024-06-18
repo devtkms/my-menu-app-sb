@@ -15,8 +15,4 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
           cache: 'gradle'
-          cache-dependency-path: |
-            build.gradle.kts
-            settings.gradle.kts
-            gradle/wrapper/gradle-wrapper.properties
       - run: ./gradlew build --no-daemon
