@@ -39,6 +39,10 @@ build/
 # Do not ignore Maven Wrapper
 !.mvn/wrapper/maven-wrapper.jar
 
+# Do not ignore Gradle Wrapper JAR and properties file
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
 # Ignore OS-related files
 .DS_Store
 Thumbs.db
