@@ -1,0 +1,81 @@
+# Ignore IDE-related files
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Eclipse ###
+.project
+.classpath
+.settings/
+.loadpath
+
+### VS Code ###
+.vscode/
+
+# Ignore Maven build artifacts
+target/
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# Ignore Gradle build artifacts
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# Ignore STS (Spring Tool Suite) related files
+.apt_generated
+.springBeans
+.sts4-cache
+
+# Ignore NetBeans related files
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Do not ignore Maven Wrapper
+!.mvn/wrapper/maven-wrapper.jar
+
+# Ignore OS-related files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore environment configuration files
+*.env
+*.local
+.env
+.env.*
+
+# Ignore Java binary files
+*.class
+*.war
+*.jar
+
+# Ignore Kotlin-related files
+*.kotlin_module
+
+# Ignore Gradle-related files
+.gradle/
+/gradle/
+/build/
+
+# Ignore cache files
+.cache/
+/tmp/
+
+# Ignore IntelliJ IDEA workspace files
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+
+# IDEA project files
+*.iml
+
+# HELP.md
+HELP.md
