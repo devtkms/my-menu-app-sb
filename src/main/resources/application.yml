@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: my-menu-app-sb
+
+  datasource:
+    url: jdbc:postgresql://my-menu-app-postgres:5432/${POSTGRES_DB}
+    username: ${APP_USER}
+    password: ${APP_USER_PASSWORD}
