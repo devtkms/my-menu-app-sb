@@ -38,6 +38,11 @@ kotlin {
 	}
 }
 
+tasks.withType<Jar> {
+	archiveFileName.set("my-menu-app-spring-0.0.1-SNAPSHOT.jar")
+	destinationDirectory.set(layout.buildDirectory.dir("libs"))
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
