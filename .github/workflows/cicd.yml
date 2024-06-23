@@ -1,4 +1,4 @@
-name: my-menu-app CI/CD Pipeline
+name: my-menu-app deploy to Amazon ECS
 
 on:
   push:
@@ -10,35 +10,18 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Set up JDK
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
-          cache-dependency-path: |
-            build.gradle.kts
-            settings.gradle.kts
-            gradle/wrapper/gradle-wrapper.properties
-
-      - name: Clean project
-        run: ./gradlew clean --no-daemon
-
-      - name: Build with Gradle
-        run: ./gradlew build --no-daemon
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ap-northeast-1
           role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          role-session-name: my-menu-app-ci
 
       - name: Login to Amazon ECR
         id: login-ecr
@@ -52,3 +35,21 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          
+      - name: Render Amazon ECS task definition
+        id: render-web-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .aws/task-def-api.json
+          container-name: dummy
+          image: public.ecr.aws/nginx/nginx:stable-perl
+          environment-variables: "LOG_LEVEL=info"
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-web-container.outputs.task-definition }}
+          service: my-menu-app-service
+          cluster: my-menu-app-cluster
+          wait-for-service-stability: true
