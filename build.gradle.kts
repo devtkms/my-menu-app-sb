@@ -39,10 +39,12 @@ kotlin {
 }
 
 tasks.withType<Jar> {
-	archiveFileName.set("my-menu-app-spring-0.0.1-SNAPSHOT.jar")
+	archiveFileName.set("my-menu-app-sb-0.0.1-SNAPSHOT.jar")
 	destinationDirectory.set(layout.buildDirectory.dir("libs"))
 	manifest {
-		attributes["Main-Class"] = "com.devtkms.mymenuappsb.MyMenuAppSbApplication"
+		attributes(
+			"Main-Class" to "com.devtkms.mymenuappsb.MyMenuAppSbApplicationKt"
+		)
 	}
 }
 
