@@ -3,6 +3,7 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.5"
 	kotlin("jvm") version "1.9.24"
 	kotlin("plugin.spring") version "1.9.24"
+	application
 }
 
 group = "com.devtkms"
@@ -41,13 +42,12 @@ kotlin {
 tasks.withType<Jar> {
 	archiveFileName.set("my-menu-app-sb-0.0.1-SNAPSHOT.jar")
 	destinationDirectory.set(layout.buildDirectory.dir("libs"))
-	manifest {
-		attributes(
-			"Main-Class" to "com.devtkms.mymenuappsb.MyMenuAppSbApplicationKt"
-		)
-	}
 }
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+application {
+	mainClass = "com.devtkms.mymenuappsb.MyMenuAppSbApplicationKt"
 }
