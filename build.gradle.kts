@@ -24,7 +24,7 @@ dependencies {
 
 	implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.postgresql:postgresql")
+	implementation("org.postgresql:postgresql:42.7.3")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
