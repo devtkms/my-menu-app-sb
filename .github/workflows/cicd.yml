@@ -34,13 +34,14 @@ jobs:
           ECR_REPOSITORY: my-menu-app-repo
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build \
-            --build-arg RDS_ENDPOINT=${{ secrets.RDS_ENDPOINT }} \
-            --build-arg RDS_PORT=${{ secrets.RDS_PORT }} \
-            --build-arg RDS_DB_NAME=${{ secrets.RDS_DB_NAME }} \
-            --build-arg RDS_USERNAME=${{ secrets.RDS_APP_USER }} \
-            --build-arg RDS_PASSWORD=${{ secrets.RDS_PASSWORD }} \
-          　-t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker buildx build \
+          --build-arg RDS_ENDPOINT=${{ secrets.RDS_ENDPOINT }} \
+          --build-arg RDS_PORT=${{ secrets.RDS_PORT }} \
+          --build-arg RDS_DB_NAME=${{ secrets.RDS_DB_NAME }} \
+          --build-arg RDS_USERNAME=${{ secrets.RDS_USERNAME }} \
+          --build-arg RDS_PASSWORD=${{ secrets.RDS_PASSWORD }} \
+          -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+          .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
           
