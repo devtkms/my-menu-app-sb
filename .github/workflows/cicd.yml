@@ -58,6 +58,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.render-web-container.outputs.task-definition }}
-          service: my-menu-app-service
+          service: my-menu-app-svc
           cluster: my-menu-app-cluster
           wait-for-service-stability: true
