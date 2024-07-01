@@ -12,4 +12,6 @@ VOLUME /tmp
 
 COPY --from=builder /app/build/libs/my-menu-app-sb-0.0.1-SNAPSHOT.jar my-menu-app.jar
 
+EXPOSE 80
+
 ENTRYPOINT ["java","-jar","/my-menu-app.jar"]
